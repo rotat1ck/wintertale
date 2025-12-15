@@ -8,7 +8,7 @@ namespace AuthService.Application.Common.Extensions {
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
-            app.UseAuthorization();
+            //app.UseAuthorization();
             app.MapControllers();
 
             app.Run();
