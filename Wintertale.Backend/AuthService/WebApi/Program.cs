@@ -8,6 +8,7 @@ namespace AuthService.WebApi {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddControllers();
 
+            builder.AppConfigureProfiles();
             builder.AppConfigureJWT();
             builder.AppPersistData();
 

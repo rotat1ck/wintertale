@@ -1,4 +1,10 @@
-﻿namespace AuthService.Application.Interfaces.Repositories {
-    public class IVerifyRepository {
+﻿using AuthService.Domain.Models;
+
+namespace AuthService.Application.Interfaces.Repositories {
+    public interface IVerifyRepository {
+        Task<Verification?> GetVerificationByCheckIdAsync(string checkId);
+        Task<Verification?> GetVerificationByPhoneAsync(string phone);
+        Task<Verification> CreateVerificationAsync(Verification request);
+        Task<Verification> UpdateVerificationAsync(Verification request);
     }
 }

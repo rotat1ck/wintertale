@@ -6,5 +6,9 @@ namespace AuthService.Application.Common.Providers {
         public string GetHash(string toHash) {
             return Crypto.HashPassword(toHash, workFactor: 12);
         }
+
+        public bool Verify(string toVerify, string hashed) {
+            return Crypto.Verify(toVerify, hashed);
+        }
     }
 }

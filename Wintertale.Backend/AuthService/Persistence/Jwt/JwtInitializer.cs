@@ -20,17 +20,24 @@ namespace AuthService.Persistence.Jwt {
                     "\tСоздать ключ(если есть openssl): openssl rand -base64 32");
                 Environment.Exit(-1);
             }
-            
 
             if (!int.TryParse(Environment.GetEnvironmentVariable("JWTLifetimeMinutes"), out int jwtLifetimeMinutes)) {
-                logger.LogWarning("Время жизни JWT ключа не указано\n" +
+                logger.LogWarning("Время жизни JWT токена не указана\n" +
                     "\tПример смотрите в файле .env.example\n" +
-                    "\tЗначение установлено на 30");
+                    "\tЗначение установлено на 30 минут");
                 jwtLifetimeMinutes = 30;
+            }
+
+            if (!int.TryParse(Environment.GetEnvironmentVariable("RefreshLifetimeDays"), out int refreshLifetimeDays)) {
+                logger.LogWarning("Время жизни Refresh токена не указана\n" +
+                    "\tПример смотрите в файле .env.example\n" +
+                    "\tЗначение установлено на 30 дней");
+                refreshLifetimeDays = 30;
             }
 
             builder.Configuration["JWT:Key"] = jwtKey;
             builder.Configuration["JWT:LifetimeMinutes"] = jwtLifetimeMinutes.ToString();
+            builder.Configuration["RefreshToken:LifetimeDays"] = refreshLifetimeDays.ToString();
 
             builder.Services.AddSingleton<IJWTProvider, JWTProvider>();
             // Добавляем политики для [Authorize]
