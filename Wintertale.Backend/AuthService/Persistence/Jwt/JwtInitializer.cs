@@ -40,6 +40,7 @@ namespace AuthService.Persistence.Jwt {
             builder.Configuration["RefreshToken:LifetimeDays"] = refreshLifetimeDays.ToString();
 
             builder.Services.AddSingleton<IJWTProvider, JWTProvider>();
+            builder.Services.AddSingleton<IHashProvider, HashProvider>();
             // Добавляем политики для [Authorize]
             builder.AppConfigurePolicies();
 

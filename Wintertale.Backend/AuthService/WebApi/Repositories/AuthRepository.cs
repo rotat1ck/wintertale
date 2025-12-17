@@ -11,6 +11,11 @@ namespace AuthService.WebApi.Repositories {
             this.context = context;
         }
 
+        public async Task<User?> GetUserByIdAsync(string userId) {
+            Guid id = Guid.Parse(userId);
+            return await context.Users.FirstOrDefaultAsync(u => u.id == id);
+        }
+
         public async Task<User?> GetUserByPhoneAsync(string phone) {
             return await context.Users.FirstOrDefaultAsync(u => u.phone == phone);
         }

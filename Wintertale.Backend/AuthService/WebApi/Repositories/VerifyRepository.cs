@@ -19,17 +19,17 @@ namespace AuthService.WebApi.Repositories {
             return await context.Verifications.FirstOrDefaultAsync(v => v.phone == phone);
         }
 
-        public async Task<Verification> CreateVerificationAsync(Verification request) {
-            context.Verifications.Add(request);
+        public async Task<Verification> CreateVerificationAsync(Verification verification) {
+            context.Verifications.Add(verification);
             await context.SaveChangesAsync();
-            return request;
+            return verification;
         }
 
-        public async Task<Verification> UpdateVerificationAsync(Verification request) {
-            request.updated_at = DateTime.UtcNow;
-            context.Verifications.Update(request);
+        public async Task<Verification> UpdateVerificationAsync(Verification verification) {
+            verification.updated_at = DateTime.UtcNow;
+            context.Verifications.Update(verification);
             await context.SaveChangesAsync();
-            return request;
+            return verification;
         }
     }
 }

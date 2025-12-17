@@ -19,6 +19,12 @@ namespace AuthService.WebApi.Controllers {
             return Ok(response);
         }
 
+        [HttpPost("refresh")]
+        public async Task<ActionResult<RefreshTokenResponse>> RefreshAsync(RefreshTokenRequest request) {
+            var response = await service.RefreshTokenAsync(request);
+            return Ok(response);
+        }
+
         [HttpPost("register")]
         public async Task<ActionResult<LoginResponse>> RegisterAsync(RegisterRequest request) {
             var response = await service.RegisterAsync(request);
