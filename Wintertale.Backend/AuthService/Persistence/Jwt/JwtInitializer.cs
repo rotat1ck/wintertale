@@ -22,14 +22,14 @@ namespace AuthService.Persistence.Jwt {
             }
 
             if (!int.TryParse(Environment.GetEnvironmentVariable("JWTLifetimeMinutes"), out int jwtLifetimeMinutes)) {
-                logger.LogWarning("Время жизни JWT токена не указана\n" +
+                logger.LogWarning("Время жизни JWT токена не указано\n" +
                     "\tПример смотрите в файле .env.example\n" +
                     "\tЗначение установлено на 30 минут");
                 jwtLifetimeMinutes = 30;
             }
 
             if (!int.TryParse(Environment.GetEnvironmentVariable("RefreshLifetimeDays"), out int refreshLifetimeDays)) {
-                logger.LogWarning("Время жизни Refresh токена не указана\n" +
+                logger.LogWarning("Время жизни Refresh токена не указано\n" +
                     "\tПример смотрите в файле .env.example\n" +
                     "\tЗначение установлено на 30 дней");
                 refreshLifetimeDays = 30;
@@ -39,8 +39,6 @@ namespace AuthService.Persistence.Jwt {
             builder.Configuration["JWT:LifetimeMinutes"] = jwtLifetimeMinutes.ToString();
             builder.Configuration["RefreshToken:LifetimeDays"] = refreshLifetimeDays.ToString();
 
-            builder.Services.AddSingleton<IJWTProvider, JWTProvider>();
-            builder.Services.AddSingleton<IHashProvider, HashProvider>();
             // Добавляем политики для [Authorize]
             builder.AppConfigurePolicies();
 

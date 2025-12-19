@@ -74,7 +74,7 @@ namespace AuthService.WebApi.Services {
         }
 
         public async Task<LoginResponse> RegisterAsync(RegisterRequest request) {
-            var phoneCheck = await repository.GetUserByPhoneAsync(request.phone)
+            var phoneCheck = await repository.GetUserByPhoneAsync(request.phone);
             if (phoneCheck != null) {
                 throw new UnprocessableException("Пользователь с таким номером телефона уже существует");
             }

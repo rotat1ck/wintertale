@@ -18,7 +18,7 @@ namespace AuthService.Application.Common.Providers {
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var claims = new List<Claim> {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+                new Claim(ClaimTypes.NameIdentifier, user.id.ToString())
             };
             var expires = DateTime.UtcNow.AddMinutes(int.Parse(config["JWT:LifetimeMinutes"]!));
 
