@@ -1,6 +1,7 @@
 using AuthService.Application.Common.Extensions;
 using AuthService.Persistence.Data;
 using AuthService.Persistence.Jwt;
+using AuthService.Persistence.Redis;
 using AuthService.Persistence.Secrets;
 
 namespace AuthService.WebApi {
@@ -15,6 +16,7 @@ namespace AuthService.WebApi {
 
             builder.AppConfigureProfiles();
             builder.AppConfigureJWT();
+            builder.AppConfigureRedis();
             builder.AppPersistData();
             builder.AppInjectSecrets();
 

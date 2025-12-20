@@ -1,0 +1,73 @@
+name: wintertale-services
+
+services:
+  auth:
+    build: ./AuthService
+    container_name: wintertale-auth
+    ports:
+      - "127.0.0.1:5120:8080"
+    environment:
+      - POSTGRES_SERVER=Host=${POSTGRES_HOST};Port=5432;Database=wintertale;Username=postgres;Password=${POSTGRES_PASSWORD};SslMode=Prefer
+      - RedisConnection=${REDIS_HOST}:6379,password=${REDIS_PASSWORD}
+      - JWTKey=${JWTKey}
+      - SMSRU_APIKEY=${SMSRU_APIKEY}
+      - JWTLifetimeMinutes=${JWTLifetimeMinutes}
+      - RefreshLifetimeDays=${RefreshLifetimeDays} 
+    networks:
+      - wintertale-network
+    restart: unless-stopped
+
+  # При развертывании произойдет проблема - порт 443 будет гарантированно занят
+  # т.к. этот nginx сервис будет бегать на машине где уже есть nginx
+  # я не стану покупать отдельный сервак для решения порта 443
+  # а менять порт приходящих https запросов на другой - костыль
+  #
+  # nginx:
+  #   image: nginx:alpine
+  #   container_name: wintertale-nginx
+  #   restart: unless-stopped
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - wintertale-nginx-data:/etc/nginx/nginx.conf
+  #     - wintertale-nginx-data:/etc/nginx/conf.d
+  #     - wintertale-nginx-data:/var/log/nginx
+  #   networks:
+  #     - wintertale-network
+  #   depends_on:
+  #     - postgres
+  #     - redis
+      
+  postgres:
+    image: postgres:15-alpine
+    container_name: wintertale-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - wintertale-sql-data:/var/lib/postgresql/data
+    networks:
+      - wintertale-network
+    command: postgres
+
+  redis:
+    image: redis:7-alpine
+    container_name: wintertale-redis
+    restart: unless-stopped
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - wintertale-redis-data:/data
+    networks:
+      - wintertale-network
+    ports:
+      - "127.0.0.1:6379:6379"
+
+volumes:
+  # wintertale-nginx-data:
+  wintertale-sql-data:
+  wintertale-redis-data:
+
+networks:
+  wintertale-network:
+    driver: bridge
