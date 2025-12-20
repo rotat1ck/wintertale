@@ -17,19 +17,20 @@ namespace AuthService.Persistence.Data {
                                         "\tСмотрите .env.example DEV настройки");
                     Environment.Exit(-1);
                 }
-            } else {
-                string? postgresHost = Environment.GetEnvironmentVariable("POSTGRES_HOST");
-                if (string.IsNullOrEmpty(postgresHost)) {
-                    logger.LogCritical("Запуск невозможен, параметр POSTGRES_HOST не указан");
-                    Environment.Exit(-1);
-                }
+            } 
+            //else {
+            //    string? postgresHost = builder.Configuration["POSTGRES_HOST"];
+            //    if (string.IsNullOrEmpty(postgresHost)) {
+            //        logger.LogCritical("Запуск невозможен, параметр POSTGRES_HOST не указан");
+            //        Environment.Exit(-1);
+            //    }
 
-                string? postgresPass = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
-                if (string.IsNullOrEmpty(postgresHost)) {
-                    logger.LogCritical("Запуск невозможен, параметр POSTGRES_PASSWORD не указан");
-                    Environment.Exit(-1);
-                }
-            }
+            //    string? postgresPass = builder.Configuration["POSTGRES_PASSWORD"];
+            //    if (string.IsNullOrEmpty(postgresHost)) {
+            //        logger.LogCritical("Запуск невозможен, параметр POSTGRES_PASSWORD не указан");
+            //        Environment.Exit(-1);
+            //    }
+            //}
 
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(connectionString)

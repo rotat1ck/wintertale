@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthService.WebApi.Controllers {
     [ApiController]
-    [Route("api/v1/auth/[verify]")]
+    [Route("api/v1/auth/[controller]")]
     public class VerifyController : Controller {
         private readonly IVerifyService service;
 
@@ -20,7 +20,7 @@ namespace AuthService.WebApi.Controllers {
 
             using var writer = new StreamWriter(Response.Body);
 
-            if (service.CheckVerificationAsync(request) != null) {
+            if (await service.CheckVerificationAsync(request) != null) {
                 await service.WriteEventAsync(writer, "Номер телефона уже верифицирован");
                 return;
             }

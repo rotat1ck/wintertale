@@ -5,17 +5,16 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
-EXPOSE 8081
 
 
 # Этот этап используется для сборки проекта службы
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["AuthService/AuthService.csproj", "AuthService/"]
-RUN dotnet restore "./AuthService/AuthService.csproj"
+COPY ["AuthService.csproj", "."]
+RUN dotnet restore "./AuthService.csproj"
 COPY . .
-WORKDIR "/src/AuthService"
+WORKDIR "/src/."
 RUN dotnet build "./AuthService.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Этот этап используется для публикации проекта службы, который будет скопирован на последний этап
