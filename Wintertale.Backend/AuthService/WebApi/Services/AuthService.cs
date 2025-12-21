@@ -31,7 +31,7 @@ namespace AuthService.WebApi.Services {
 
         public async Task<LoginResponse> RefreshTokenAsync(RefreshTokenRequest request) {
             var refreshTokenObj = await repository.GetRefreshTokenAsync(request.refresh_token);
-            if (refreshTokenObj == null || refreshTokenObj.expires_at > DateTime.UtcNow) {
+            if (refreshTokenObj == null || refreshTokenObj.expires_at < DateTime.UtcNow) {
                 throw new UnauthorizedAccessException("Токен невалиден или устарел");
             }
 

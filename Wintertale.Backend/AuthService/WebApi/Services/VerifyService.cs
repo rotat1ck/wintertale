@@ -33,6 +33,7 @@ namespace AuthService.WebApi.Services {
 
             if (json.RootElement.TryGetProperty("check_id", out var id)) {
                 var pendingVerification = await repository.GetVerificationByPhoneAsync(request.phone);
+                await WriteEventAsync(writer, "Continue");
                 if (pendingVerification != null) {
                     pendingVerification.check_id = id.ToString();
                     pendingVerification.updated_at = DateTime.UtcNow;

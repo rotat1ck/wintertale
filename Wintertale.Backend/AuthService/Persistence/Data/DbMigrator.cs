@@ -7,7 +7,7 @@ namespace AuthService.Persistence.Data {
             var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
             try {
-                context.Database.EnsureCreated();
+                //context.Database.EnsureCreated();
                 var pendingMigrations = context.Database.GetPendingMigrations();
                 if (pendingMigrations.Any()) {
                     context.Database.Migrate();
