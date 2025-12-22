@@ -26,9 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Common\Exceptions\" />
-    <Folder Include="Application\Common\Extensions\" />
-    <Folder Include="WebApi\Controllers\" />
+    <Folder Include="WebApi\Middlewares\" />
   </ItemGroup>
 
 </Project>

@@ -17,6 +17,20 @@ services:
       - wintertale-network
     restart: unless-stopped
 
+  friends:
+    build: ./FriendsService
+    container_name: wintertale-friends
+    ports:
+      - "127.0.0.1:5121:8080"
+    environment:
+      - POSTGRES_SERVER=Host=${POSTGRES_HOST};Port=5432;Database=wintertale;Username=postgres;Password=${POSTGRES_PASSWORD};SslMode=Prefer
+      - JWTKey=${JWTKey}
+      - JWTLifetimeMinutes=${JWTLifetimeMinutes}
+      - RefreshLifetimeDays=${RefreshLifetimeDays} 
+    networks:
+      - wintertale-network
+    restart: unless-stopped
+
   # При развертывании произойдет проблема - порт 443 будет гарантированно занят
   # т.к. этот nginx сервис будет бегать на машине где уже есть nginx
   # я не стану покупать отдельный сервак для решения порта 443

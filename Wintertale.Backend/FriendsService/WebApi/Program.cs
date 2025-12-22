@@ -10,7 +10,6 @@ namespace FriendsService.WebApi {
 
             builder.AppRegisterRepositories();
             builder.AppRegisterServices();
-            builder.AppRegisterProviders();
 
             builder.AppConfigureProfiles();
 

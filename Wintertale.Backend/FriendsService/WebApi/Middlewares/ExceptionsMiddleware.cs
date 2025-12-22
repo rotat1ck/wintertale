@@ -1,6 +1,6 @@
-﻿using AuthService.Application.Common.Exceptions;
+﻿using FriendsService.Application.Common.Exceptions;
 
-namespace AuthService.WebApi.Middlewares {
+namespace FriendsService.WebApi.Middlewares {
     public class ExceptionsMiddleware {
         private readonly RequestDelegate next;
 

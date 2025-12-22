@@ -114,7 +114,17 @@ namespace FriendsService.WebApi.Services {
         }
 
         public async Task RemoveFriendAsync(RemoveFriendRequest request, string requesterId) {
+            var friendUser = await userRepository.GetUserByPhoneAsync(request.phone)
+               ?? throw new UnprocessableException("Пользователь с таким номером телефона не найден");
 
+            if (friendUser.id.ToString() == requesterId) {
+                throw new InvalidActionException("Невозможно удалить несуществующий запрос дружбы самому себе");
+            }
+
+            var friend = await repository.GetFriendByUserAsync(friendUser, requesterId)
+                ?? throw new UnprocessableException("Запрос дружбы не найден");
+
+            await repository.RemoveFriendAsync(friend);
         }
     }
 }
