@@ -1,6 +1,6 @@
-﻿using FriendsService.Domain.Enums;
+﻿using Domain.Enums;
 
-namespace FriendsService.Domain.Models {
+namespace Domain.Models {
     public class Friend {
         public Guid id { get; set; } = Guid.NewGuid();
         public Guid user_id_requester { get; set; }

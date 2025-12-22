@@ -1,5 +1,6 @@
 ﻿using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
+using Persistence;
 
 namespace AuthService.Persistence.Data {
     public static class DbInitializer {
@@ -18,22 +19,9 @@ namespace AuthService.Persistence.Data {
                     Environment.Exit(-1);
                 }
             } 
-            //else {
-            //    string? postgresHost = builder.Configuration["POSTGRES_HOST"];
-            //    if (string.IsNullOrEmpty(postgresHost)) {
-            //        logger.LogCritical("Запуск невозможен, параметр POSTGRES_HOST не указан");
-            //        Environment.Exit(-1);
-            //    }
-
-            //    string? postgresPass = builder.Configuration["POSTGRES_PASSWORD"];
-            //    if (string.IsNullOrEmpty(postgresHost)) {
-            //        logger.LogCritical("Запуск невозможен, параметр POSTGRES_PASSWORD не указан");
-            //        Environment.Exit(-1);
-            //    }
-            //}
 
             builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseNpgsql(connectionString)
+                options.UseNpgsql(connectionString, opt => opt.MigrationsAssembly("Persistence"))
             );
 
             return builder;

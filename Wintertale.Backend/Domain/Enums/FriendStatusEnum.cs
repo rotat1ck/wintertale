@@ -1,4 +1,4 @@
-﻿namespace FriendsService.Domain.Enums {
+﻿namespace Domain.Enums {
     public enum FriendStatusEnum {
         Send = 0,
         Accepted = 1,

@@ -1,5 +1,6 @@
 ﻿using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
+using Persistence;
 
 namespace FriendsService.Persistence.Data {
     public static class DbInitializer {
@@ -20,7 +21,7 @@ namespace FriendsService.Persistence.Data {
             }
 
             builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseNpgsql(connectionString)
+                options.UseNpgsql(connectionString, opt => opt.MigrationsAssembly("Persistence"))
             );
 
             return builder;

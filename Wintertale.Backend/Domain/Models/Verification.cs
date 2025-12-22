@@ -1,7 +1,9 @@
-﻿using AuthService.Domain.Enums;
+﻿using Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 
-namespace AuthService.Domain.Models {
+namespace Domain.Models {
     public class Verification {
+        [Key]
         public Guid id { get; set; } = Guid.NewGuid();
         public string check_id { get; set; }
         public string phone { get; set; }

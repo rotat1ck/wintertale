@@ -1,4 +1,4 @@
-﻿namespace AuthService.Domain.Enums {
+﻿namespace Domain.Enums {
     public enum VerificationEnum {
         Pending = 0,
         Failed = 1,
