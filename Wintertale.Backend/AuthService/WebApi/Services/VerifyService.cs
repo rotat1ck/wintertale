@@ -3,8 +3,8 @@ using AuthService.Application.DTOs.Requests;
 using AuthService.Application.Interfaces.Providers;
 using AuthService.Application.Interfaces.Repositories;
 using AuthService.Application.Interfaces.Services;
-using AuthService.Domain.Enums;
-using AuthService.Domain.Models;
+using Domain.Enums;
+using Domain.Models;
 using System.Text.Json;
 
 namespace AuthService.WebApi.Services {

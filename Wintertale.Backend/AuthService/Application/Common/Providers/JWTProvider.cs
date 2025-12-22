@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using AuthService.Application.Interfaces.Providers;
-using AuthService.Domain.Models;
+using Domain.Models;
 using Microsoft.IdentityModel.Tokens;
 
 namespace AuthService.Application.Common.Providers {

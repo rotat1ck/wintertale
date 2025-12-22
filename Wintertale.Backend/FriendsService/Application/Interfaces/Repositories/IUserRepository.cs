@@ -1,4 +1,4 @@
-﻿using FriendsService.Domain.Models;
+﻿using Domain.Models;
 
 namespace FriendsService.Application.Interfaces.Repositories {
     public interface IUserRepository {

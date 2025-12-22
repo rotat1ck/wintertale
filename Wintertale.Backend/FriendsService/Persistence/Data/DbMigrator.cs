@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Persistence;
 
 namespace FriendsService.Persistence.Data {
     public static class DbMigrator {

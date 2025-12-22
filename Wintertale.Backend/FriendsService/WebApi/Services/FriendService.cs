@@ -4,8 +4,8 @@ using FriendsService.Application.DTOs.Responses;
 using FriendsService.Application.Interfaces.Repositories;
 using FriendsService.Application.Interfaces.Services;
 using FriendsService.Application.Common.Exceptions;
-using FriendsService.Domain.Enums;
-using FriendsService.Domain.Models;
+using Domain.Enums;
+using Domain.Models;
 
 namespace FriendsService.WebApi.Services {
     public class FriendService : IFriendService {

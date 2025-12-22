@@ -1,6 +1,6 @@
 ﻿using AuthService.Application.DTOs.Requests;
 using AuthService.Application.DTOs.Responses;
-using AuthService.Domain.Models;
+using Domain.Models;
 using AutoMapper;
 
 namespace AuthService.Application.Common.Profiles {

@@ -1,4 +1,4 @@
-﻿using AuthService.Domain.Models;
+﻿using Domain.Models;
 
 namespace AuthService.Application.Interfaces.Repositories {
     public interface IAuthRepository {

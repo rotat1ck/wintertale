@@ -1,6 +1,6 @@
 ﻿using FriendsService.Application.Interfaces.Repositories;
-using FriendsService.Domain.Models;
-using FriendsService.Persistence.Data;
+using Domain.Models;
+using Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace FriendsService.WebApi.Repositories {

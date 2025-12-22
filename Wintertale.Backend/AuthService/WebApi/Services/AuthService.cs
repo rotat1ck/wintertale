@@ -5,7 +5,7 @@ using AuthService.Application.DTOs.Responses;
 using AuthService.Application.Interfaces.Providers;
 using AuthService.Application.Interfaces.Repositories;
 using AuthService.Application.Interfaces.Services;
-using AuthService.Domain.Models;
+using Domain.Models;
 using AutoMapper;
 
 namespace AuthService.WebApi.Services {
