@@ -6,5 +6,6 @@ namespace FriendsService.Persistence.Data {
         public AppDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Friend> Friends { get; set; }  
     }
 }
