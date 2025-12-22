@@ -39,6 +39,15 @@ namespace FriendsService.WebApi.Repositories {
                 .ToListAsync();
         }
 
+        public async Task<Friend?> GetFriendByUserAsync(User targetUser, string requesterId) {
+            Guid userId = Guid.Parse(requesterId);
+
+            return await context.Friends.FirstOrDefaultAsync(f => 
+                (f.user_id_requester == targetUser.id || f.user_id_receiver == targetUser.id) &&
+                (f.user_id_requester == userId || f.user_id_receiver == userId)
+            );
+        }
+
         public async Task<Friend> CreateFriendAsync(Friend friend) {
             context.Friends.Add(friend);
             await context.SaveChangesAsync();
