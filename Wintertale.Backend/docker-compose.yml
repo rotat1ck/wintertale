@@ -2,7 +2,9 @@ name: wintertale-services
 
 services:
   auth:
-    build: ./AuthService
+    build: 
+      context: .
+      dockerfile: AuthService/Dockerfile
     container_name: wintertale-auth
     ports:
       - "127.0.0.1:5120:8080"
@@ -18,7 +20,9 @@ services:
     restart: unless-stopped
 
   friends:
-    build: ./FriendsService
+    build:
+      context: . 
+      dockerfile: FriendsService/Dockerfile
     container_name: wintertale-friends
     ports:
       - "127.0.0.1:5121:8080"

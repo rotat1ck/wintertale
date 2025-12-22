@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
+using Domain.Enums;
+using Domain.Models;
+using FriendsService.Application.Common.Exceptions;
 using FriendsService.Application.DTOs.Requests;
 using FriendsService.Application.DTOs.Responses;
 using FriendsService.Application.Interfaces.Repositories;
 using FriendsService.Application.Interfaces.Services;
-using FriendsService.Application.Common.Exceptions;
-using Domain.Enums;
-using Domain.Models;
 
 namespace FriendsService.WebApi.Services {
     public class FriendService : IFriendService {
@@ -30,7 +30,8 @@ namespace FriendsService.WebApi.Services {
             var friendsUsers = await userRepository.GetUsersByIdsAsync(friendsIds);
 
             var converted = mapper.Map<List<FriendResponse>>(acceptedFriends);
-            return mapper.Map(friendsUsers, converted);
+            mapper.Map(friendsUsers, converted);
+            return converted;
         }
 
         public async Task<List<FriendResponse>> GetPendingFriendsReceivedAsync(string requesterId) {
@@ -43,7 +44,8 @@ namespace FriendsService.WebApi.Services {
             var sendersUsers = await userRepository.GetUsersByIdsAsync(sendersIds);
 
             var converted = mapper.Map<List<FriendResponse>>(received);
-            return mapper.Map(sendersUsers, converted);
+            mapper.Map(sendersUsers, converted);
+            return converted;
         }
 
         public async Task<List<FriendResponse>> GetPendingFriendsSendedAsync(string requesterId) {
@@ -79,12 +81,16 @@ namespace FriendsService.WebApi.Services {
                 throw new InvalidActionException("Вы уже отправили запрос этому пользователю");
             }
 
-            var friend = mapper.Map<Friend>(request);
-            friend.user_id_requester = Guid.Parse(requesterId);
-            friend.user_id_receiver = friendUser.id;
+            var friend = new Friend {
+                user_id_requester = Guid.Parse(requesterId),
+                user_id_receiver = friendUser.id
+            };
             friend = await repository.CreateFriendAsync(friend);
 
-            return mapper.Map<FriendResponse>(friend);
+            var response = mapper.Map<FriendResponse>(friend);
+            mapper.Map(friendUser, response);
+
+            return response;
         }
 
         public async Task<FriendResponse> UpdateFriendAsync(UpdateFriendRequest request, string requesterId) {
@@ -108,8 +114,8 @@ namespace FriendsService.WebApi.Services {
                 throw new AccessDeniedException("Отправитель не может подтвердить запрос");
             }
 
-            mapper.Map(request, friend);
             friend = await repository.UpdateFriendAsync(friend);
+            mapper.Map(request, friend);
             return mapper.Map<FriendResponse>(friend);
         }
 

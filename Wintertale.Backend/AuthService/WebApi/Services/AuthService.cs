@@ -5,8 +5,8 @@ using AuthService.Application.DTOs.Responses;
 using AuthService.Application.Interfaces.Providers;
 using AuthService.Application.Interfaces.Repositories;
 using AuthService.Application.Interfaces.Services;
-using Domain.Models;
 using AutoMapper;
+using Domain.Models;
 
 namespace AuthService.WebApi.Services {
     public class AuthService : IAuthService {
@@ -79,9 +79,9 @@ namespace AuthService.WebApi.Services {
                 throw new UnprocessableException("Пользователь с таким номером телефона уже существует");
             }
 
-            if (await verifyRepository.GetVerificationByPhoneAsync(request.phone) == null) {
-                throw new UnauthorizedAccessException("Номер телефона не верифицирован");
-            }
+            //if (await verifyRepository.GetVerificationByPhoneAsync(request.phone) == null) {
+            //    throw new UnauthorizedAccessException("Номер телефона не верифицирован");
+            //}
 
             var user = mapper.Map<User>(request);
             user.password = hashProvider.GetHash(user.password);

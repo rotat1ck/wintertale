@@ -1,7 +1,7 @@
-﻿using DotNetEnv;
+﻿using System.Text;
+using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 namespace FriendsService.Persistence.Jwt {
     public static class JwtInitializer {
@@ -53,6 +53,8 @@ namespace FriendsService.Persistence.Jwt {
                     ValidateAudience = false,
                 };
             });
+
+            builder.Services.AddAuthorization();
 
             builder.Services.AddHttpContextAccessor();
 

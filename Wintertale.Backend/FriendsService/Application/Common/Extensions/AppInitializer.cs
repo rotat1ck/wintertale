@@ -10,6 +10,7 @@ namespace FriendsService.Application.Common.Extensions {
 
             app.UseHttpsRedirection();
             app.UseAuthentication();
+            app.UseAuthorization();
             app.MapControllers();
 
             app.Run();
