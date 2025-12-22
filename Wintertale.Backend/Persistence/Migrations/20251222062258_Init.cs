@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace AuthService.Migrations
+namespace Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class Init : Migration
@@ -11,6 +11,22 @@ namespace AuthService.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Friends",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    user_id_requester = table.Column<Guid>(type: "uuid", nullable: false),
+                    user_id_receiver = table.Column<Guid>(type: "uuid", nullable: false),
+                    status = table.Column<int>(type: "integer", nullable: false),
+                    сreated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Friends", x => x.id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "RefreshTokens",
                 columns: table => new
@@ -30,7 +46,7 @@ namespace AuthService.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    fname = table.Column<string>(type: "text", nullable: false),
+                    fname = table.Column<string>(type: "character varying(24)", nullable: false),
                     phone = table.Column<string>(type: "text", nullable: false),
                     password = table.Column<string>(type: "text", nullable: false),
                     utc_offset = table.Column<double>(type: "double precision", nullable: false),
@@ -62,6 +78,9 @@ namespace AuthService.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Friends");
+
             migrationBuilder.DropTable(
                 name: "RefreshTokens");
 

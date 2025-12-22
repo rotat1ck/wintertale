@@ -1,6 +1,6 @@
 ﻿using AuthService.Application.Interfaces.Repositories;
-using AuthService.Domain.Models;
-using AuthService.Persistence.Data;
+using Domain.Models;
+using Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace AuthService.WebApi.Repositories {

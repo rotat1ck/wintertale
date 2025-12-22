@@ -1,5 +1,5 @@
 ﻿using AuthService.Application.DTOs.Requests;
-using AuthService.Domain.Models;
+using Domain.Models;
 
 namespace AuthService.Application.Interfaces.Services {
     public interface IVerifyService {
