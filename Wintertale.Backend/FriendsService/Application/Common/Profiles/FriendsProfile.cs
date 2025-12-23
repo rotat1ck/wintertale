@@ -11,10 +11,7 @@ namespace FriendsService.Application.Common.Profiles {
             CreateMap<UpdateFriendRequest, Friend>();
 
             CreateMap<Friend, FriendResponse>();
-            CreateMap<User, FriendResponse>()
-                .ForMember(dest => dest.user_id_requester, opt => opt.Ignore())
-                .ForMember(dest => dest.user_id_receiver, opt => opt.Ignore())
-                .ForMember(dest => dest.status, opt => opt.Ignore());
+            CreateMap<User, FriendResponse>();
         }
     }
 }

@@ -5,5 +5,7 @@ namespace FriendsService.Application.Interfaces.Repositories {
         Task<User?> GetUserByIdAsync(string id);
         Task<List<User>> GetUsersByIdsAsync(List<Guid> ids);
         Task<User?> GetUserByPhoneAsync(string phone);
+
+        Task<User> UpdateUserAsync(User user);
     }
 }

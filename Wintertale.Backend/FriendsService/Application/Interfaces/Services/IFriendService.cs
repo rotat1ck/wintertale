@@ -22,5 +22,6 @@ namespace FriendsService.Application.Interfaces.Services {
         Task<FriendResponse> CreateFriendAsync(CreateFriendRequest request, string requesterId);
         Task<FriendResponse> UpdateFriendAsync(UpdateFriendRequest request, string requesterId);
         Task RemoveFriendAsync(RemoveFriendRequest request, string requesterId);
+        Task UpdateUtcOffsetAsync(UpdateUtcOffsetRequest request, string requesterId);
     }
 }

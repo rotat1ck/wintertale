@@ -63,5 +63,13 @@ namespace FriendsService.WebApi.Controllers {
             await service.RemoveFriendAsync(request, requesterId);
             return Ok();
         }
+
+        [HttpPost("utc")]
+        public async Task<ActionResult> UpdateUtcOffsetAsync(UpdateUtcOffsetRequest request) {
+            string requesterId = User.GetRequesterId();
+
+            await service.UpdateUtcOffsetAsync(request, requesterId);
+            return Ok();
+        }
     }
 }

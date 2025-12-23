@@ -8,7 +8,7 @@ namespace FriendsService.Application.Common.Extensions {
 
             app.UseMiddleware<ExceptionsMiddleware>();
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();

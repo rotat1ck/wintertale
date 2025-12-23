@@ -19,6 +19,18 @@ namespace FriendsService.WebApi.Services {
             this.mapper = mapper;
         }
 
+        private List<FriendResponse> CombineFriendResponseData(List<Friend> friends, List<User> users) {
+            var friendsData = mapper.Map<List<FriendResponse>>(friends);
+            var usersData = mapper.Map<List<FriendResponse>>(users);
+
+            return friendsData.Zip(usersData).Select(values => {
+                values.First.fname = values.Second.fname;
+                values.First.phone = values.Second.phone;
+                values.First.utc_offset = values.Second.utc_offset;
+                return values.First;
+            }).ToList();
+        }
+
         public async Task<List<FriendResponse>> GetFriendListAsync(string requesterId) {
             var acceptedFriends = await repository.GetAcceptedFriendsAsync(requesterId);
 
@@ -29,9 +41,7 @@ namespace FriendsService.WebApi.Services {
 
             var friendsUsers = await userRepository.GetUsersByIdsAsync(friendsIds);
 
-            var converted = mapper.Map<List<FriendResponse>>(acceptedFriends);
-            mapper.Map(friendsUsers, converted);
-            return converted;
+            return CombineFriendResponseData(acceptedFriends, friendsUsers);
         }
 
         public async Task<List<FriendResponse>> GetPendingFriendsReceivedAsync(string requesterId) {
@@ -43,9 +53,7 @@ namespace FriendsService.WebApi.Services {
             var sendersIds = received.Select(f => f.user_id_requester).ToList();
             var sendersUsers = await userRepository.GetUsersByIdsAsync(sendersIds);
 
-            var converted = mapper.Map<List<FriendResponse>>(received);
-            mapper.Map(sendersUsers, converted);
-            return converted;
+            return CombineFriendResponseData(received, sendersUsers);
         }
 
         public async Task<List<FriendResponse>> GetPendingFriendsSendedAsync(string requesterId) {
@@ -57,8 +65,7 @@ namespace FriendsService.WebApi.Services {
             var sendersIds = sended.Select(f => f.user_id_requester).ToList();
             var sendersUsers = await userRepository.GetUsersByIdsAsync(sendersIds);
 
-            var converted = mapper.Map<List<FriendResponse>>(sended);
-            return mapper.Map(sendersUsers, converted);
+            return CombineFriendResponseData(sended, sendersUsers);
         }
 
         public async Task<FriendResponse> CreateFriendAsync(CreateFriendRequest request, string requesterId) {
@@ -78,6 +85,13 @@ namespace FriendsService.WebApi.Services {
                     return await UpdateFriendAsync(updateRequest, requesterId);
                 }
 
+                if (existCheck.user_id_receiver.ToString() == requesterId) {
+                    var updateRequest = mapper.Map<UpdateFriendRequest>(request);
+                    updateRequest.status = (int)FriendStatusEnum.Accepted;
+
+                    return await UpdateFriendAsync(updateRequest, requesterId);
+                }
+
                 throw new InvalidActionException("Вы уже отправили запрос этому пользователю");
             }
 
@@ -88,7 +102,9 @@ namespace FriendsService.WebApi.Services {
             friend = await repository.CreateFriendAsync(friend);
 
             var response = mapper.Map<FriendResponse>(friend);
-            mapper.Map(friendUser, response);
+            response.fname = friendUser.fname;
+            response.phone = friendUser.phone;
+            response.utc_offset = friendUser.utc_offset;
 
             return response;
         }
@@ -114,9 +130,15 @@ namespace FriendsService.WebApi.Services {
                 throw new AccessDeniedException("Отправитель не может подтвердить запрос");
             }
 
+            friend.status = (int)request.status!;
             friend = await repository.UpdateFriendAsync(friend);
-            mapper.Map(request, friend);
-            return mapper.Map<FriendResponse>(friend);
+
+            var response = mapper.Map<FriendResponse>(friend);
+            response.fname = friendUser.fname;
+            response.phone = friendUser.phone;
+            response.utc_offset = friendUser.utc_offset;
+
+            return response;
         }
 
         public async Task RemoveFriendAsync(RemoveFriendRequest request, string requesterId) {
@@ -131,6 +153,14 @@ namespace FriendsService.WebApi.Services {
                 ?? throw new UnprocessableException("Запрос дружбы не найден");
 
             await repository.RemoveFriendAsync(friend);
+        }
+
+        public async Task UpdateUtcOffsetAsync(UpdateUtcOffsetRequest request, string requesterId) {
+            var user = await userRepository.GetUserByIdAsync(requesterId)
+                ?? throw new NotFoundException();
+
+            user.utc_offset = request.utc_offset;
+            user = await userRepository.UpdateUserAsync(user);
         }
     }
 }

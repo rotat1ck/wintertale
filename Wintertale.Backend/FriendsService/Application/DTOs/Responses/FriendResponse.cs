@@ -5,5 +5,6 @@
         public int status { get; set; }
         public string fname { get; set; }
         public string phone { get; set; }
+        public double utc_offset { get; set; }
     }
 }
