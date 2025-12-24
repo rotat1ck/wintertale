@@ -4,12 +4,11 @@ using System.Text;
 
 namespace Wintertale.Client.Services.BaseApi {
     internal abstract class BaseApiService {
-        public string BaseUri {
-            get;
-            protected set {
-                value.TrimEnd('/');
-                BaseUri = value;
-            } 
+        private string? baseUri;
+
+        public string? BaseUri {
+            get => baseUri; 
+            protected set => baseUri = value?.TrimEnd('/');
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
-using Wintertale.Client.Config.DI;
+using Wintertale.Client.Common.Extensions;
 
 namespace Wintertale.Client
 {
@@ -19,9 +19,10 @@ namespace Wintertale.Client
                 });
 
             builder.AppRegisterServices();
+            builder.AppRegisterViewModels();
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

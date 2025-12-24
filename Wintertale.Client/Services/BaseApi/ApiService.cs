@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Net.ServerSentEvents;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
@@ -9,6 +10,7 @@ namespace Wintertale.Client.Services.BaseApi {
 
         public ApiService(HttpClient client) {
             this.client = client;
+            client.Timeout = TimeSpan.FromMinutes(5);
             this.BaseUri = "https://wintertale.rotatick.ru/";
         }
 
@@ -21,7 +23,6 @@ namespace Wintertale.Client.Services.BaseApi {
             };
 
             if (request != null) {
-                requestMessage.Headers.Add("Content-Type", "application/json");
                 requestMessage.Content = JsonContent.Create(request);
             }
 
@@ -44,7 +45,9 @@ namespace Wintertale.Client.Services.BaseApi {
                 RequestUri = new Uri(endPoint),
                 Method = HttpMethod.Get
             };
-            requestMessage.Headers.Add("Content-Type", "text/event-stream");
+            //requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("text/event-stream"));
+            //requestMessage.Headers.Add("Cache-Control", "no-cache");
+            requestMessage.Headers.ConnectionClose = true;
 
             if (request != null) {
                 requestMessage.Content = JsonContent.Create(request);

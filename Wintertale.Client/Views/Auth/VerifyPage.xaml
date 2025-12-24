@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wintertale.Client.Views.Auth.VerifyPage"
              xmlns:local="clr-namespace:Wintertale.Client.ViewModels.Auth"
-             x:Class="Wintertale.Client.Views.LoginPage">
+             Title="VerifyPage">
 
     <Grid ColumnDefinitions="Auto,*">
-        <VerticalStackLayout Padding="20" Grid.Column="0">
-            <Entry Text="{Binding Phone}" Placeholder="7XXXXXXXXXX"/>
-            <Entry Text="{Binding Password}" Placeholder="********" IsPassword="True"/>
-            <Button Text="Login" Command="{Binding LoginCommand}" />
-            <Button Text="Back" Command="{Binding BackCommand}" />
+        <VerticalStackLayout Grid.Column="0" Padding="20">
+            <Entry Placeholder="7XXXXXXXXXX" Text="{Binding Phone}" MaxLength="11"/>
+            <Button Text="Верифицировать" Command="{Binding VerifyCommand}"/>
         </VerticalStackLayout>
         <VerticalStackLayout Grid.Column="1" Padding="20">
             <CollectionView ItemsSource="{Binding Messages}" />

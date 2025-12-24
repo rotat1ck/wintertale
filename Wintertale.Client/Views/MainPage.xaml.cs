@@ -1,11 +1,17 @@
 ﻿using CommunityToolkit.Maui.Extensions;
+using Wintertale.Client.Views.Auth;
 
 namespace Wintertale.Client.Views {
     public partial class MainPage : ContentPage {
-        LoginPage loginPage = new LoginPage();
+        LoginPage loginPage;
+        VerifyPage verifyPage;
 
         public MainPage() {
             InitializeComponent();
+
+            loginPage = new LoginPage();
+            verifyPage = new VerifyPage();
+
             Navigation.PushAsync(loginPage);
         }
 

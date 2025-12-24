@@ -1,15 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+
 using Wintertale.Client.Common.DTOs.Requests.Auth;
 using Wintertale.Client.Services.Auth;
 
 namespace Wintertale.Client.ViewModels.Auth {
     [INotifyPropertyChanged]
-    internal partial class LoginViewModel  {
+    internal partial class VerifyViewModel {
         private readonly IAuthService service;
 
-        public LoginViewModel(IAuthService service) {
+        public VerifyViewModel(IAuthService service) {
             this.service = service;
         }
 
@@ -17,28 +18,19 @@ namespace Wintertale.Client.ViewModels.Auth {
         private string phone;
 
         [ObservableProperty]
-        private string password;
-
-        [ObservableProperty]
         private ObservableCollection<string> messages = new();
 
-
         [RelayCommand]
-        private async Task Back() {
-            await Shell.Current.Navigation.PopAsync();    
-        }
-
-        [RelayCommand]
-        private async Task Login() {
-            var loginRequest = new LoginRequest {
-                phone = Phone,
-                password = Password,
+        private async Task Verify() {
+            Messages.Add("Starting");
+            var request = new PhoneVerificationRequest {
+                phone = Phone
             };
 
             try {
-                Messages.Add("Запрос отправлен");
-                var response = await service.LoginAsync(loginRequest);
-                Messages.Add($"Токен: {response.token}");
+                await foreach (var message in service.VerifyAsync(request)) {
+                    Messages.Add(message);
+                }
             } catch (HttpRequestException ex) {
                 Messages.Add(ex.Message);
             }
