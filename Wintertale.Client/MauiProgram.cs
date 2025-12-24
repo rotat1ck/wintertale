@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
+using Wintertale.Client.Config.DI;
 
 namespace Wintertale.Client
 {
@@ -16,6 +17,8 @@ namespace Wintertale.Client
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+            builder.AppRegisterServices();
 
 #if DEBUG
     		builder.Logging.AddDebug();

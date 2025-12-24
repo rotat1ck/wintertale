@@ -1,14 +1,19 @@
-﻿using CommunityToolkit.Mvvm;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Wintertale.Client.ViewModels.Auth {
     [INotifyPropertyChanged]
-    internal partial class LoginViewModel : ObservableObject {
+    internal partial class LoginViewModel  {
         public LoginViewModel() {
 
         }
 
         [ObservableProperty]
-        public string name = "Test";
+        private string name = "Test";
+
+        [RelayCommand]
+        private async Task Back() {
+            await Shell.Current.Navigation.PopAsync();    
+        }
     }
 }
