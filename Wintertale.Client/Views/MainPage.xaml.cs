@@ -15,8 +15,8 @@ namespace Wintertale.Client.Views {
             Navigation.PushAsync(loginPage);
         }
 
-        private void Button_Clicked(object sender, EventArgs e) {
-            Navigation.PushAsync(loginPage);
+        private async void Button_Clicked(object sender, EventArgs e) {
+            await Navigation.PushAsync(loginPage);
         }
     }
 }
