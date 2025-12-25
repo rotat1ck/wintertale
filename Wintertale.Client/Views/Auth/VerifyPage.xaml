@@ -2,16 +2,46 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wintertale.Client.Views.Auth.VerifyPage"
-             xmlns:local="clr-namespace:Wintertale.Client.ViewModels.Auth"
-             Title="VerifyPage">
+             xmlns:local="clr-namespace:Wintertale.Client.ViewModels.Auth">
 
-    <Grid ColumnDefinitions="Auto,*">
-        <VerticalStackLayout Grid.Column="0" Padding="20">
-            <Entry Placeholder="7XXXXXXXXXX" Text="{Binding Phone}" MaxLength="11"/>
-            <Button Text="Верифицировать" Command="{Binding VerifyCommand}"/>
-        </VerticalStackLayout>
-        <VerticalStackLayout Grid.Column="1" Padding="20">
-            <CollectionView ItemsSource="{Binding Messages}" />
+    <Grid ColumnDefinitions="*">
+        <Image Source="background.png" Aspect="AspectFill"/>
+
+        <Border Opacity="0.9">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#80000000" Offset="0" />
+                    <GradientStop Color="#CC000000" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+            <!-- Надпись регистрации -->
+            <Label Style="{StaticResource InputLabelStyle}"
+                   FontSize="18" Text="Верификация" 
+                   HorizontalOptions="Center"/>
+
+            <!-- Иконка хлопушки -->
+            <Border Style="{StaticResource DecorativeBorderStyle}" Margin="30">
+                <Image HeightRequest="28" Source="confetti.png"/>
+            </Border>
+            
+            <Label Text="Необходима верификация номера:" FontSize="18"
+                   Style="{StaticResource TitleLabelStyle}" HorizontalTextAlignment="Center"/>
+            <Label Text="{Binding Phone}" Style="{StaticResource SubtitleLabelStyle}" 
+                   VerticalOptions="Center" Margin="0,10,0,0"/>
+
+            <Label Text="Для завершения верификации позвоните на следующий номер:" 
+                   Margin="0,30,0,0" HorizontalTextAlignment="Center" 
+                   FontSize="18" Style="{StaticResource TitleLabelStyle}"/>
+            
+            <Grid HorizontalOptions="Center">
+                <Border Style="{StaticResource InputBorderStyle}" StrokeShape="RoundRectangle 10">
+                    <Label Text="+7 (499) 555-55-55" HorizontalOptions="Center" Margin="5"
+                           Style="{StaticResource TitleLabelStyle}"/>
+                </Border>
+            </Grid>
         </VerticalStackLayout>
     </Grid>
 </ContentPage>

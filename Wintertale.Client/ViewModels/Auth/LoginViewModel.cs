@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using Wintertale.Client.Common.DTOs.Requests.Auth;
 using Wintertale.Client.Services.Auth;
+using Wintertale.Client.Views;
 
 namespace Wintertale.Client.ViewModels.Auth {
     [INotifyPropertyChanged]
@@ -42,6 +43,11 @@ namespace Wintertale.Client.ViewModels.Auth {
             } catch (HttpRequestException ex) {
                 Messages.Add(ex.Message);
             }
+        }
+
+        [RelayCommand]
+        private async Task OpenRegister() {
+            await Shell.Current.GoToAsync("RegistrationStartPage", true);
         }
     }
 }

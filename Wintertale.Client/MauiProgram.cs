@@ -16,6 +16,9 @@ namespace Wintertale.Client
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("SplineSans-Regular.ttf", "SplineSansRegular");
+                    fonts.AddFont("SplineSans-SemiBold.ttf", "SplineSansSemiBold");
+                    fonts.AddFont("SplineSans-Bold.ttf", "SplineSansBold");
                 });
 
             builder.AppRegisterServices();
