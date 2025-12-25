@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wintertale.Client.Views.Auth.RegistrationStartPage">
+
+    <Grid ColumnDefinitions="*">
+        <Image Source="background.png" Aspect="AspectFill"/>
+
+        <Border Opacity="0.9">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#80000000" Offset="0" />
+                    <GradientStop Color="#CC000000" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+            <!-- Надпись регистрации -->
+            <Label Style="{StaticResource InputLabelStyle}"
+                   FontSize="18" Text="Вход" 
+                   HorizontalOptions="Center"/>         
+
+            <!-- Иконка хлопушки -->
+            <Border Style="{StaticResource DecorativeBorderStyle}" Margin="30">
+                <Image HeightRequest="28" Source="confetti.png"/>
+            </Border>
+
+            <!-- Надписи -->
+            <Label Text="Присоединяйтесь к празднику!" Style="{StaticResource TitleLabelStyle}"
+                   HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+            <Label Text="Создайте аккаунт, чтобы не пропустить новогоднее волшебство"
+                   MaximumWidthRequest="250" Margin="0,10,0,0"
+                   Style="{StaticResource SubtitleLabelStyle}"/>    
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

@@ -64,7 +64,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\LoginPage.xaml.cs">
+	  <Compile Update="Views\Auth\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
@@ -73,10 +73,13 @@
 	  <MauiXaml Update="Resources\Styles\AuthStyles.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Auth\RegistrationStartPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Auth\VerifyPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\LoginPage.xaml">
+	  <MauiXaml Update="Views\Auth\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

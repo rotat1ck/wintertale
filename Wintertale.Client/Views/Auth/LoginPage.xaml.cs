@@ -1,6 +1,6 @@
 using Wintertale.Client.ViewModels.Auth;
 
-namespace Wintertale.Client.Views;
+namespace Wintertale.Client.Views.Auth;
 
 public partial class LoginPage : ContentPage {
 	public LoginPage() {

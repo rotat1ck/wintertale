@@ -47,7 +47,7 @@ namespace Wintertale.Client.ViewModels.Auth {
 
         [RelayCommand]
         private async Task OpenRegister() {
-            await Shell.Current.GoToAsync("//MainPage", true);
+            await Shell.Current.GoToAsync("RegistrationStartPage", true);
         }
     }
 }
