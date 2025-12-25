@@ -2,11 +2,96 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wintertale.Client.Views.Dashboard.DashboardPage"
-             Title="DashboardPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to dashboard"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             BackgroundColor="#320A10">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+    
+    <Grid ColumnDefinitions="*">
+        <VerticalStackLayout Grid.Column="0" VerticalOptions="Start">
+            <!-- Вверх -->
+            <Grid ColumnDefinitions="Auto,*,Auto" Padding="20">
+                <Border Grid.Column="0"
+                        StrokeShape="RoundRectangle 15" StrokeThickness="0">
+                    <Image HeightRequest="13" WidthRequest="18"
+                           Source="back.png" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenFriendsCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Border>
+            
+                <Label Grid.Column="1" FontSize="18" Text="Таймер 2025" 
+                       HorizontalOptions="Center" VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       Style="{StaticResource TitleLabelStyle}"/>
+            
+                <Border Grid.Column="2" HeightRequest="40" WidthRequest="40"
+                        StrokeShape="RoundRectangle 35" StrokeThickness="0" BackgroundColor="#11FFFFFF">
+                    <Image HeightRequest="18" WidthRequest="13"
+                           Source="friends.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenFriendsCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Border>
+            </Grid>
+        
+            <!-- Надписи -->
+            <Label Text="До Нового года осталось" Style="{StaticResource TitleLabelStyle}"
+                    HorizontalTextAlignment="Center"/>
+            <Label Text="Время чудес приближается"
+                   MaximumWidthRequest="250" Margin="0,10,0,0"
+                   Style="{StaticResource SubtitleLabelStyle}"/>
+            
+            <!-- Таймер -->
+            <HorizontalStackLayout Padding="20" Spacing="12" HorizontalOptions="Center">
+                <VerticalStackLayout>
+                    <Border StrokeShape="RoundRectangle 40" HeightRequest="50" WidthRequest="50">
+                        <Label Text="05" FontFamily="SplineSans-Bold" FontSize="30" TextColor="#2BEE79"
+                               VerticalOptions="Center" HorizontalOptions="Center"/>
+                    </Border>
+                    <Label Text="Дней" FontFamily="SplineSans-Bold" FontSize="12"
+                           TextColor="#99FFFFFF" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <Label Text=":" FontFamily="SplineSans-Bold" FontSize="24" TextColor="#992BEE79"
+                       VerticalOptions="Center" />
+
+                <VerticalStackLayout >
+                    <Border StrokeShape="RoundRectangle 40" HeightRequest="50" WidthRequest="50">
+                        <Label Text="05" FontFamily="SplineSans-Bold" FontSize="30" TextColor="#2BEE79"
+                               VerticalOptions="Center" HorizontalOptions="Center"/>
+                    </Border>
+                    <Label Text="Часов" FontFamily="SplineSans-Bold" FontSize="12"
+                           TextColor="#99FFFFFF" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <Label Text=":" FontFamily="SplineSans-Bold" FontSize="24" TextColor="#992BEE79"
+                       VerticalOptions="Center" />
+
+                <VerticalStackLayout >
+                    <Border StrokeShape="RoundRectangle 40" HeightRequest="50" WidthRequest="50">
+                        <Label Text="05" FontFamily="SplineSans-Bold" FontSize="30" TextColor="#2BEE79"
+                               VerticalOptions="Center" HorizontalOptions="Center"/>
+                    </Border>
+                    <Label Text="Минут" FontFamily="SplineSans-Bold" FontSize="12"
+                           TextColor="#99FFFFFF" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <Label Text=":" FontFamily="SplineSans-Bold" FontSize="24" TextColor="#992BEE79"
+                                VerticalOptions="Center" />
+
+                <VerticalStackLayout >
+                    <Border StrokeShape="RoundRectangle 40" HeightRequest="50" WidthRequest="50">
+                        <Label Text="05" FontFamily="SplineSans-Bold" FontSize="30" TextColor="#2BEE79"
+                               VerticalOptions="Center" HorizontalOptions="Center"/>
+                    </Border>
+                    <Label Text="Секунд" FontFamily="SplineSans-Bold" FontSize="12"
+                           TextColor="#99FFFFFF" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>

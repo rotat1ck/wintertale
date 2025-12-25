@@ -21,8 +21,12 @@ namespace Wintertale.Client.ViewModels.Auth {
 
         public async Task RefreshAsync() {
             try {
-                await service.RefreshTokenAsync();
-                await Shell.Current.GoToAsync("DashboardPage");
+                var response = await service.RefreshTokenAsync();
+
+                var navigationParameters = new Dictionary<string, object> {
+                    { "CurrentUser", response },
+                };
+                await Shell.Current.GoToAsync("DashboardPage", navigationParameters);
             } catch {
                 
             }
@@ -43,7 +47,11 @@ namespace Wintertale.Client.ViewModels.Auth {
 
             try {
                 var response = await service.LoginAsync(loginRequest);
-                await Shell.Current.GoToAsync("DashboardPage");
+
+                var navigationParameters = new Dictionary<string, object> {
+                    { "CurrentUser", response },
+                };
+                await Shell.Current.GoToAsync("DashboardPage", navigationParameters);
             } catch (HttpRequestException ex) {
                 await Shell.Current.DisplayAlertAsync("Ошибка входа", ex.Message, "ОК");
             }

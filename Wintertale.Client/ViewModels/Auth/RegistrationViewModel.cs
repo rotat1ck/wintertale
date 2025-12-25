@@ -86,7 +86,11 @@ namespace Wintertale.Client.ViewModels.Auth {
 
             try {
                 var response = await service.RegisterAsync(request);
-                await Shell.Current.GoToAsync("DashboardPage");
+
+                var navigationParameters = new Dictionary<string, object> {
+                    { "CurrentUser", response },
+                };
+                await Shell.Current.GoToAsync("DashboardPage", navigationParameters);
             } catch (Exception ex) {
                 await Shell.Current.DisplayAlertAsync("Ошибка регистрации", ex.Message, "ОК");
             }
