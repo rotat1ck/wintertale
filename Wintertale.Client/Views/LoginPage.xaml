@@ -18,55 +18,44 @@
 
         <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
             <!-- Надпись входа -->
-            <Label TextColor="#FFFFFF" FontFamily="SplineSans-SemiBold" 
-                   FontSize="18" Text="Вход" FontAttributes="Bold"
+            <Label Style="{StaticResource InputLabelStyle}"
+                   FontSize="18" Text="Вход" 
                    HorizontalOptions="Center"/>
 
             <!-- Иконка хлопушки -->
-            <Border HeightRequest="64" WidthRequest="64" Margin="30"
-                    StrokeShape="RoundRectangle 32,32,32,32"
-                    StrokeThickness="0"
-                    BackgroundColor="#33e6192a">
-                <Image HeightRequest="28"
-                        Source="confetti.png"/>
+            <Border Style="{StaticResource DecorativeBorderStyle}" Margin="30">
+                <Image HeightRequest="28" Source="confetti.png"/>
             </Border>
 
             <!-- Надписи -->
-            <Label TextColor="#FFFFFF" FontFamily="SplineSans-SemiBold"
-                   FontSize="32" FontAttributes="Bold" Text="С новым годом!"
+            <Label Text="С новым годом!" Style="{StaticResource TitleLabelStyle}"
                    HorizontalOptions="Center"/>
-            <Label TextColor="#C89398" FontFamily="SplineSans-Regular"
-                   FontSize="16" Text="Войдите, чтобы отслеживать праздник и смотреть трансляцию"
+            <Label Text="Войдите, чтобы отслеживать праздник и смотреть трансляцию"
                    MaximumWidthRequest="250" Margin="0,10,0,0"
-                   HorizontalTextAlignment="Center"/>
+                   Style="{StaticResource SubtitleLabelStyle}"/>
 
             <!-- Ввод номера -->
             <VerticalStackLayout Padding="32,32,32,0">
-                <Label TextColor="#FFFFFF" FontFamily="SplineSans-Regular"
-                       FontSize="14" Text="Номер телефона"
+                <Label Text="Номер телефона" Style="{StaticResource InputLabelStyle}"
                        Margin="10,0,0,5"/>
-                <Border StrokeShape="RoundRectangle 48" Stroke="#653438">
-                    <Grid ColumnDefinitions="*,Auto" BackgroundColor="#321A1C">
-                        <Entry Grid.Column="0" Text="{Binding Phone}" FontFamily="SplineSans-Regular"
-                               FontSize="16" Opacity="0.6" TextColor="#c89398" 
-                               Placeholder="7XXXXXXXXXX" PlaceholderColor="#c89398" MaxLength="11"/>
+                <Border Style="{StaticResource InputBorderStyle}">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Entry Grid.Column="0" Text="{Binding Phone}" Placeholder="7XXXXXXXXXX" 
+                               MaxLength="11" Style="{StaticResource DefaultEntryStyle}"/>
                         <Image Grid.Column="1" Source="phone.png" Margin="0,0,16,0"
-                                       HeightRequest="18" HorizontalOptions="End"/>
+                               HeightRequest="18" HorizontalOptions="End"/>
                     </Grid>
                 </Border>
             </VerticalStackLayout>
             
             <!-- Ввод пароля -->
             <VerticalStackLayout Padding="32,16,32,0">
-                <Label TextColor="#FFFFFF" FontFamily="SplineSans-Regular"
-                       FontSize="14" Text="Пароль"
+                <Label Text="Пароль" Style="{StaticResource InputLabelStyle}"
                        Margin="10,0,0,5"/>
-                <Border StrokeShape="RoundRectangle 48" Stroke="#653438">
+                <Border Style="{StaticResource InputBorderStyle}">
                     <Grid ColumnDefinitions="*,Auto" BackgroundColor="#321A1C">
-                        <Entry Grid.Column="0" Text="{Binding Password}" FontFamily="SplineSans-Regular"
-                               FontSize="16" Opacity="0.6" TextColor="#c89398" 
-                               Placeholder="••••••••" PlaceholderColor="#c89398" 
-                               IsPassword="True"/>
+                        <Entry Grid.Column="0" Text="{Binding Password}" Placeholder="••••••••" 
+                               IsPassword="True" Style="{StaticResource DefaultEntryStyle}"/>
                         <Image Grid.Column="1" Source="password.png" Margin="0,0,16,0"
                                HeightRequest="15" WidthRequest="21" HorizontalOptions="End"/>
                     </Grid>
@@ -74,15 +63,14 @@
             </VerticalStackLayout>
             
             <!-- Кнопка входа -->
-            <Button Margin="32,32,32,0" Command="{Binding LoginCommand}"
-                    Text="Войти" TextColor="#FFFFFF" FontFamily="SplineSans-Regular"
-                    BackgroundColor="#E6192A" CornerRadius="24"/>
+            <Button Margin="32,32,32,0" Command="{Binding LoginCommand}" Text="Войти"
+                    Style="{StaticResource PrimaryButtonStyle}"/>
             
             <!-- Нет аккаунта -->
             <HorizontalStackLayout Padding="50" HorizontalOptions="Center">
-                <Label Text="Нет аккаунта?" TextColor="#C89398" FontSize="16" FontFamily="SplineSans-Regular" />
-                <Label Text="Зарегистрироваться" TextColor="#E6192A" Margin="5,0,0,0"
-                       FontSize="16" FontFamily="SplineSans-Regular" >
+                <Label Text="Нет аккаунта?" Style="{StaticResource SubtitleLabelStyle}"/>
+                <Label Text="Зарегистрироваться" Margin="5,0,0,0"
+                       Style="{StaticResource LinkLabelStyle}">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding OpenRegisterCommand}" />
                     </Label.GestureRecognizers>
