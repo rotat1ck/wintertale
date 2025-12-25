@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using Wintertale.Client.Common.DTOs.Requests.Auth;
 using Wintertale.Client.Services.Auth;
 
@@ -26,8 +27,14 @@ namespace Wintertale.Client.ViewModels.Auth {
 
         [RelayCommand]
         private async Task Verify() {
+            string formattedPhone = Regex.Replace(Phone, @"\D", "");
+            if (!Regex.IsMatch(formattedPhone, @"^7\d{10}$")) {
+                await Shell.Current.DisplayAlertAsync("Ошибка валидации", formattedPhone, "ОК");
+                return;
+            }
+
             var request = new PhoneVerificationRequest {
-                phone = Phone
+                phone = formattedPhone
             };
 
             try {
@@ -66,13 +73,23 @@ namespace Wintertale.Client.ViewModels.Auth {
 
         [RelayCommand]
         private async Task Register() {
+            if (Name.Length > 24) {
+                await Shell.Current.DisplayAlertAsync("Ошибка валидации", "Длина имени не должна превышать 24 символа", "ОК");
+                return;
+            }
+
             var request = new RegisterRequest {
                 fname = Name,
-                phone = Phone,
+                phone = Regex.Replace(Phone, @"\D", ""),
                 password = Password
             };
 
-
+            try {
+                var response = await service.RegisterAsync(request);
+                await Shell.Current.GoToAsync("DashboardPage");
+            } catch (Exception ex) {
+                await Shell.Current.DisplayAlertAsync("Ошибка регистрации", ex.Message, "ОК");
+            }
         }
     }
 }

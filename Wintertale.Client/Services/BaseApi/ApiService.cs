@@ -64,10 +64,15 @@ namespace Wintertale.Client.Services.BaseApi {
 
         private async Task<string> HandleErrorResponse(HttpContent content) {
             string errorMessage = "Что-то пошло не так, повторите попытку позже";
-            var error = JsonSerializer.Deserialize<Dictionary<string, string>>(await content.ReadAsStringAsync())!;
-            if (error.ContainsKey("error")) {
-                errorMessage = error["error"];
+            try {
+                var error = JsonSerializer.Deserialize<Dictionary<string, string>>(await content.ReadAsStringAsync())!;
+                if (error.ContainsKey("error")) {
+                    errorMessage = error["error"];
+                }
+            } catch {
+
             }
+
             throw new HttpRequestException(errorMessage);
         }
     }
