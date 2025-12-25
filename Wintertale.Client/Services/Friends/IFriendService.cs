@@ -10,5 +10,6 @@ namespace Wintertale.Client.Services.Friends {
         Task<List<FriendResponse>> GetFriendListAsync();
         Task<List<FriendResponse>> GetPendingFriendsReceivedAsync();
         Task<List<FriendResponse>> GetPendingFriendsSentAsync();
+        Task RemoveFriendAsync(RemoveFriendRequest request);
     }
 }

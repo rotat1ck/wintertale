@@ -25,5 +25,9 @@ namespace Wintertale.Client.Services.Friends {
         public async Task<List<FriendResponse>> GetPendingFriendsSentAsync() {
             return await api.HttpAsync<List<FriendResponse>>(HttpMethod.Get, "api/v1/friends/pending/sent");
         }
+
+        public async Task RemoveFriendAsync(RemoveFriendRequest request) {
+            await api.HttpAsync(HttpMethod.Delete, "api/v1/friends", request);
+        }
     }
 }

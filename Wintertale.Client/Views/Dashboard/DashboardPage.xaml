@@ -18,7 +18,7 @@
                     <Image HeightRequest="13" WidthRequest="18"
                            Source="back.png" >
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding OpenFriendsCommand}" />
+                            <TapGestureRecognizer Command="{Binding BackCommand}" />
                         </Image.GestureRecognizers>
                     </Image>
                 </Border>

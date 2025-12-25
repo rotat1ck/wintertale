@@ -44,9 +44,18 @@ namespace Wintertale.Client.ViewModels.Dashboard {
         }
 
         [RelayCommand]
-        private async Task RemoveFriend(FriendResponse friend) {
-            Debug.WriteLine($"Removing: {friend.fname}");
+        private async Task Back() {
+            await Shell.Current.GoToAsync("..");
+        }
 
+        [RelayCommand]
+        private async Task RemoveFriend(FriendResponse friend) {
+            var request = new RemoveFriendRequest {
+                phone = friend.phone
+            };
+
+            await service.RemoveFriendAsync(request);
+            Friends.Remove(friend);
         }
 
         [ObservableProperty]
