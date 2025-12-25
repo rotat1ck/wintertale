@@ -18,7 +18,7 @@
         <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
             <!-- Надпись регистрации -->
             <Label Style="{StaticResource InputLabelStyle}"
-                   FontSize="18" Text="Вход" 
+                   FontSize="18" Text="Регистрация" 
                    HorizontalOptions="Center"/>         
 
             <!-- Иконка хлопушки -->
@@ -31,7 +31,36 @@
                    HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
             <Label Text="Создайте аккаунт, чтобы не пропустить новогоднее волшебство"
                    MaximumWidthRequest="250" Margin="0,10,0,0"
-                   Style="{StaticResource SubtitleLabelStyle}"/>    
+                   Style="{StaticResource SubtitleLabelStyle}"/>
+
+            <!-- Ввод номера -->
+            <VerticalStackLayout Padding="32,32,32,0">
+                <Label Text="Номер телефона" Style="{StaticResource InputLabelStyle}"
+                       Margin="10,0,0,5"/>
+                <Border Style="{StaticResource InputBorderStyle}">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Entry Grid.Column="0" Text="{Binding Phone}" Placeholder="7XXXXXXXXXX" 
+                               MaxLength="11" Style="{StaticResource DefaultEntryStyle}"/>
+                        <Image Grid.Column="1" Source="phone.png" Margin="0,0,16,0"
+                               HeightRequest="18" HorizontalOptions="End"/>
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- Кнопка регистрации -->
+            <Button Margin="32,32,32,0" Command="{Binding VerifyCommand}" Text="Верифицировать"
+                    Style="{StaticResource PrimaryButtonStyle}"/>
+
+            <!-- Нет аккаунта -->
+            <HorizontalStackLayout Padding="50" HorizontalOptions="Center">
+                <Label Text="Уже есть аккаунт?" Style="{StaticResource SubtitleLabelStyle}"/>
+                <Label Text="Войти" Margin="5,0,0,0"
+                       Style="{StaticResource LinkLabelStyle}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
         </VerticalStackLayout>
     </Grid>
 </ContentPage>

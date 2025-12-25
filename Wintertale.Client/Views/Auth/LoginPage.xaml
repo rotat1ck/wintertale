@@ -5,7 +5,7 @@
              x:Class="Wintertale.Client.Views.Auth.LoginPage">
 
     <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsEnabled="False" />
+        <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
     </Shell.BackButtonBehavior>
 
     <Grid ColumnDefinitions="*" RowDefinitions="*">
