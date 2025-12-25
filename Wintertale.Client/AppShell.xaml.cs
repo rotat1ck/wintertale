@@ -13,6 +13,7 @@ namespace Wintertale.Client {
             Routing.RegisterRoute("RegistrationFinalizePage", typeof(RegistrationFinalizePage));
 
             Routing.RegisterRoute("DashboardPage", typeof(DashboardPage));
+            Routing.RegisterRoute("FriendRequestsPage", typeof(FriendRequestsPage));
         }
     }
 }

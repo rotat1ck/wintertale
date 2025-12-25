@@ -26,6 +26,14 @@ namespace Wintertale.Client.Services.Friends {
             return await api.HttpAsync<List<FriendResponse>>(HttpMethod.Get, "api/v1/friends/pending/sent");
         }
 
+        public async Task<FriendResponse> CreateFriendAsync(CreateFriendRequest request) {
+            return await api.HttpAsync<CreateFriendRequest, FriendResponse>(HttpMethod.Post, "api/v1/friends", request);
+        }
+
+        public async Task<FriendResponse> UpdateFriendAsync(UpdateFriendRequest request) {
+            return await api.HttpAsync<UpdateFriendRequest, FriendResponse>(HttpMethod.Post, "api/v1/friends/update", request);
+        }
+
         public async Task RemoveFriendAsync(RemoveFriendRequest request) {
             await api.HttpAsync(HttpMethod.Delete, "api/v1/friends", request);
         }

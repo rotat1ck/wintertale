@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Wintertale.Client.Views.Dashboard.FriendRequestsPage"
+             x:Name="Page">
+    
+    <Grid ColumnDefinitions="*">
+        <Image Source="background.png" Aspect="AspectFill" />
+
+        <Border Opacity="0.9">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#80000000" Offset="0" />
+                    <GradientStop Color="#CC000000" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <VerticalStackLayout Grid.Column="0" VerticalOptions="Start">
+            <!-- Вверх -->
+            <Grid ColumnDefinitions="Auto,*" Padding="20">
+                <Border Grid.Column="0"
+                    StrokeShape="RoundRectangle 15" StrokeThickness="0">
+                    <Image HeightRequest="13" WidthRequest="18"
+                       Source="back.png" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Border>
+
+                <Label Grid.Column="1" FontSize="18" Text="Список друзей" 
+                   HorizontalOptions="Center" VerticalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   Style="{StaticResource TitleLabelStyle}"/>
+            </Grid>
+            
+            <!-- Иконка хлопушки -->
+            <Border Style="{StaticResource DecorativeBorderStyle}" Margin="30">
+                <Image HeightRequest="28" Source="confetti.png"/>
+            </Border>
+
+            <!-- Надписи -->
+            <Label Text="Пригласи друзей!" Style="{StaticResource TitleLabelStyle}"
+                HorizontalTextAlignment="Center"/>
+            <Label Text="Встречайте Новый год вместе, делитесь моментами и следите за таймером"
+               MaximumWidthRequest="250" Margin="0,10,0,0"
+               Style="{StaticResource SubtitleLabelStyle}"/>
+            
+            <!-- Пригласить -->
+            <Border Style="{StaticResource InputBorderStyle}" Margin="20">
+                <!-- Ввод номера -->
+                <VerticalStackLayout Padding="32,32,32,20">
+                    <Label Text="Номер телефона" Style="{StaticResource InputLabelStyle}"
+                           Margin="10,0,0,5"/>
+                    <Border Style="{StaticResource InputBorderStyle}">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Entry Grid.Column="0" Text="{Binding FriendPhone}" Placeholder="+7 (XXX) XXX-XX-XX" 
+                                       MaxLength="18" Style="{StaticResource DefaultEntryStyle}"
+                                       Keyboard="Telephone">
+                                <Entry.Behaviors >
+                                    <toolkit:MaskedBehavior Mask="+X (XXX) XXX-XX-XX" />
+                                </Entry.Behaviors>
+                            </Entry>
+                            <Image Grid.Column="1" Source="phone.png" Margin="0,0,16,0"
+                           HeightRequest="18" HorizontalOptions="End"/>
+                        </Grid>
+                    </Border>
+                    <Button Style="{StaticResource PrimaryButtonStyle}" Command="{Binding CreateFriendCommand}"
+                            Text="Отправить запрос" Margin="0,20,0,0" CornerRadius="20"/>
+                </VerticalStackLayout>
+            </Border>
+
+             <Label Grid.Column="0" Text="Входящие запросы" FontSize="18" HorizontalOptions="Start" Padding="50,0,0,0"
+                    Style="{StaticResource TitleLabelStyle}"/>
+            <ScrollView>
+                <CollectionView ItemsSource="{Binding PendingFriends}" Margin="32,16,32,0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource InputBorderStyle}" Padding="15">
+                                <Grid ColumnDefinitions="*,Auto,Auto" RowDefinitions="*,*" VerticalOptions="Center">
+                                    <Label Grid.Column="0" Text="{Binding fname}" 
+                                           Style="{StaticResource InputLabelStyle}" 
+                                           HorizontalOptions="Start" VerticalOptions="Center"/>
+                                    <Label Grid.Row="1" Text="{Binding phone}" 
+                                           Style="{StaticResource SubtitleLabelStyle}" 
+                                           HorizontalOptions="Start" VerticalOptions="Center"/>
+                                    <Image Grid.Column="1" Grid.Row="1" Source="cross.png" Margin="0,-20,40,0"
+                                           HeightRequest="20"  VerticalOptions="Center">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.RemovePendingFriendCommand, Source={x:Reference Page}}"
+                                                                  CommandParameter="{Binding}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+
+                                    <Image Grid.Column="2" Grid.Row="1" Source="accept.png" Margin="0,-20,16,0" 
+                                           HeightRequest="20" VerticalOptions="Center">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.UpdateFriendCommand, Source={x:Reference Page}}"
+                                                                  CommandParameter="{Binding}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
