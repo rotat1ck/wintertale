@@ -62,6 +62,26 @@ namespace Wintertale.Client.Services.BaseApi {
             }
         }
 
+        public async Task<TResponse> HttpAsync<TResponse>(HttpMethod method, string uri) {
+            string endPoint = $"{BaseUri}/{uri.TrimStart('/')}";
+
+            var requestMessage = new HttpRequestMessage {
+                RequestUri = new Uri(endPoint),
+                Method = method
+            };
+
+            var response = await client.SendAsync(requestMessage);
+
+            if (!response.IsSuccessStatusCode) {
+                await HandleErrorResponse(response.Content);
+            }
+
+            var result = await response.Content.ReadFromJsonAsync<TResponse>()
+                ?? throw new HttpRequestException($"Ошибка десереализации");
+
+            return result;
+        }
+
         public async Task HttpAsync<TRequest>(HttpMethod method, string uri, TRequest? request) {
             string endPoint = $"{BaseUri}/{uri.TrimStart('/')}";
 

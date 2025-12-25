@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wintertale.Client.Views.Dashboard.DashboardPage"
-             BackgroundColor="#320A10">
+             BackgroundColor="#320A10"
+             x:Name="Page">
+    
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
     </Shell.BackButtonBehavior>
@@ -46,45 +48,46 @@
             
             <!-- Таймер -->
             <HorizontalStackLayout Padding="20" Spacing="12" HorizontalOptions="Center">
+                <!-- Дни -->
                 <VerticalStackLayout>
-                    <Border StrokeShape="RoundRectangle 40" HeightRequest="50" WidthRequest="50">
-                        <Label Text="05" FontFamily="SplineSans-Bold" FontSize="30" TextColor="#2BEE79"
+                    <Border StrokeShape="RoundRectangle 40" HeightRequest="60" WidthRequest="50">
+                        <Label Text="{Binding Days}" FontFamily="SplineSans-Bold" FontSize="30" TextColor="#2BEE79"
                                VerticalOptions="Center" HorizontalOptions="Center"/>
                     </Border>
                     <Label Text="Дней" FontFamily="SplineSans-Bold" FontSize="12"
                            TextColor="#99FFFFFF" HorizontalOptions="Center"/>
                 </VerticalStackLayout>
-
                 <Label Text=":" FontFamily="SplineSans-Bold" FontSize="24" TextColor="#992BEE79"
                        VerticalOptions="Center" />
 
+                <!-- Часы -->
                 <VerticalStackLayout >
-                    <Border StrokeShape="RoundRectangle 40" HeightRequest="50" WidthRequest="50">
-                        <Label Text="05" FontFamily="SplineSans-Bold" FontSize="30" TextColor="#2BEE79"
+                    <Border StrokeShape="RoundRectangle 40" HeightRequest="60" WidthRequest="50">
+                        <Label Text="{Binding Hours}" FontFamily="SplineSans-Bold" FontSize="30" TextColor="#2BEE79"
                                VerticalOptions="Center" HorizontalOptions="Center"/>
                     </Border>
                     <Label Text="Часов" FontFamily="SplineSans-Bold" FontSize="12"
                            TextColor="#99FFFFFF" HorizontalOptions="Center"/>
                 </VerticalStackLayout>
-
                 <Label Text=":" FontFamily="SplineSans-Bold" FontSize="24" TextColor="#992BEE79"
                        VerticalOptions="Center" />
 
+                <!-- Минуты -->
                 <VerticalStackLayout >
-                    <Border StrokeShape="RoundRectangle 40" HeightRequest="50" WidthRequest="50">
-                        <Label Text="05" FontFamily="SplineSans-Bold" FontSize="30" TextColor="#2BEE79"
+                    <Border StrokeShape="RoundRectangle 40" HeightRequest="60" WidthRequest="50">
+                        <Label Text="{Binding Minutes}" FontFamily="SplineSans-Bold" FontSize="30" TextColor="#2BEE79"
                                VerticalOptions="Center" HorizontalOptions="Center"/>
                     </Border>
                     <Label Text="Минут" FontFamily="SplineSans-Bold" FontSize="12"
                            TextColor="#99FFFFFF" HorizontalOptions="Center"/>
                 </VerticalStackLayout>
-
                 <Label Text=":" FontFamily="SplineSans-Bold" FontSize="24" TextColor="#992BEE79"
                                 VerticalOptions="Center" />
 
+                <!-- Секунды -->
                 <VerticalStackLayout >
-                    <Border StrokeShape="RoundRectangle 40" HeightRequest="50" WidthRequest="50">
-                        <Label Text="05" FontFamily="SplineSans-Bold" FontSize="30" TextColor="#2BEE79"
+                    <Border StrokeShape="RoundRectangle 40" HeightRequest="60" WidthRequest="50">
+                        <Label Text="{Binding Seconds}" FontFamily="SplineSans-Bold" FontSize="30" TextColor="#2BEE79"
                                VerticalOptions="Center" HorizontalOptions="Center"/>
                     </Border>
                     <Label Text="Секунд" FontFamily="SplineSans-Bold" FontSize="12"
@@ -92,6 +95,33 @@
                 </VerticalStackLayout>
 
             </HorizontalStackLayout>
+
+            <Label Text="Друзья" Style="{StaticResource TitleLabelStyle}" Padding="0,50,0,0"/>
+            <ScrollView>
+                <CollectionView ItemsSource="{Binding Friends}" Margin="32,16,32,0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource InputBorderStyle}" Padding="15">
+                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="*,*" VerticalOptions="Center">
+                                    <Label Grid.Column="0" Text="{Binding fname}" 
+                                               Style="{StaticResource InputLabelStyle}" 
+                                               HorizontalOptions="Start" VerticalOptions="Center"/>
+                                    <Label Grid.Row="1" Text="{Binding phone}" 
+                                           Style="{StaticResource SubtitleLabelStyle}" 
+                                           HorizontalOptions="Start" VerticalOptions="Center"/>
+                                    <Image Grid.Column="1" Grid.Row="1" Source="cross.png" Margin="0,-20,16,0"
+                                           HeightRequest="20"  VerticalOptions="Center">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.RemoveFriendCommand, Source={x:Reference Page}}"
+                                                                  CommandParameter="{Binding}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
         </VerticalStackLayout>
     </Grid>
 </ContentPage>
