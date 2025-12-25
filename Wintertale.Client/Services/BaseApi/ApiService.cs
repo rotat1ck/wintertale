@@ -62,6 +62,25 @@ namespace Wintertale.Client.Services.BaseApi {
             }
         }
 
+        public async Task HttpAsync<TRequest>(HttpMethod method, string uri, TRequest? request) {
+            string endPoint = $"{BaseUri}/{uri.TrimStart('/')}";
+
+            var requestMessage = new HttpRequestMessage {
+                RequestUri = new Uri(endPoint),
+                Method = method
+            };
+
+            if (request != null) {
+                requestMessage.Content = JsonContent.Create(request);
+            }
+
+            var response = await client.SendAsync(requestMessage);
+
+            if (!response.IsSuccessStatusCode) {
+                await HandleErrorResponse(response.Content);
+            }
+        }
+
         private async Task<string> HandleErrorResponse(HttpContent content) {
             string errorMessage = "Что-то пошло не так, повторите попытку позже";
             try {

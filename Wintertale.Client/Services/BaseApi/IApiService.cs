@@ -19,6 +19,7 @@ namespace Wintertale.Client.Services.BaseApi {
         /// <param name="request">DTO Request файл</param>
         /// <returns>Сериализованный объект <typeparamref name="TResponse"/></returns>
         Task<TResponse> HttpAsync<TRequest, TResponse>(HttpMethod method, string uri, TRequest? request);
+        Task HttpAsync<TRequest>(HttpMethod method, string uri, TRequest? request);
 
         /// <summary>
         /// Выполняет HTTP GET длинный запрос
