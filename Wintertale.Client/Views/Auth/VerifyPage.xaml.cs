@@ -6,6 +6,6 @@ namespace Wintertale.Client.Views.Auth;
 public partial class VerifyPage : ContentPage{
 	public VerifyPage() {
 		InitializeComponent();
-		BindingContext = App.ServiceProvider.GetService<VerifyViewModel>();
+		BindingContext = App.ServiceProvider.GetService<RegistrationViewModel>();
 	}
 }

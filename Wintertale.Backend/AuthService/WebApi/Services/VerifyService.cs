@@ -5,6 +5,7 @@ using AuthService.Application.Interfaces.Repositories;
 using AuthService.Application.Interfaces.Services;
 using Domain.Enums;
 using Domain.Models;
+using System.Reflection.Metadata.Ecma335;
 using System.Text.Json;
 
 namespace AuthService.WebApi.Services {
@@ -65,8 +66,10 @@ namespace AuthService.WebApi.Services {
         }
 
         public async Task PublishAsync(string checkId, string callcheck_status) {
-            var verification = await repository.GetVerificationByCheckIdAsync(checkId) ??
-                throw new UnprocessableException();
+            var verification = await repository.GetVerificationByCheckIdAsync(checkId);
+            if (verification == null) {
+                return;
+            }
             
             string? message;
 

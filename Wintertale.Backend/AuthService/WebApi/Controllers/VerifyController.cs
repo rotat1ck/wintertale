@@ -35,14 +35,14 @@ namespace AuthService.WebApi.Controllers {
         [HttpPost("result")]
         public async Task WebhookResultAsync() {
             var form = await HttpContext.Request.ReadFormAsync();
-
+            
             form.TryGetValue("data[0]", out var dataValue);
+                
             var parts = dataValue.ToString().Split('\n', StringSplitOptions.RemoveEmptyEntries);
-
             if (parts[0] == "callcheck_status") {
                 await service.PublishAsync(parts[1], parts[2]);
             }
-
+            
             await HttpContext.Response.WriteAsync("100");
         }
     }

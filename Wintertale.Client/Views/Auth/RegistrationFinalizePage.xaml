@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Wintertale.Client.ViewModels.Auth"
-             x:Class="Wintertale.Client.Views.Auth.LoginPage">
-
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
-    </Shell.BackButtonBehavior>
-
-    <Grid ColumnDefinitions="*" RowDefinitions="*">
-        <Image Source="background.png" Aspect="AspectFill" />
+             x:Class="Wintertale.Client.Views.Auth.RegistrationFinalizePage">
+    
+    <Grid ColumnDefinitions="*">
+        <Image Source="background.png" Aspect="AspectFill"/>
 
         <Border Opacity="0.9">
             <Border.Background>
@@ -21,10 +16,10 @@
         </Border>
 
         <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
-            <!-- Надпись входа -->
+            <!-- Надпись регистрации -->
             <Label Style="{StaticResource InputLabelStyle}"
-                   FontSize="18" Text="Вход" 
-                   HorizontalOptions="Center"/>
+               FontSize="18" Text="Регистрация" 
+               HorizontalOptions="Center"/>
 
             <!-- Иконка хлопушки -->
             <Border Style="{StaticResource DecorativeBorderStyle}" Margin="30">
@@ -32,32 +27,32 @@
             </Border>
 
             <!-- Надписи -->
-            <Label Text="С новым годом!" Style="{StaticResource TitleLabelStyle}"
-                   HorizontalOptions="Center"/>
-            <Label Text="Войдите, чтобы отслеживать праздник и смотреть трансляцию"
+            <Label Text="Присоединяйтесь к празднику!" Style="{StaticResource TitleLabelStyle}"
+                   HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+            <Label Text="Создайте аккаунт, чтобы не пропустить новогоднее волшебство"
                    MaximumWidthRequest="250" Margin="0,10,0,0"
                    Style="{StaticResource SubtitleLabelStyle}"/>
 
-            <!-- Ввод номера -->
+            <!-- Ввод имени -->
             <VerticalStackLayout Padding="32,32,32,0">
-                <Label Text="Номер телефона" Style="{StaticResource InputLabelStyle}"
+                <Label Text="Имя" Style="{StaticResource InputLabelStyle}"
                        Margin="10,0,0,5"/>
                 <Border Style="{StaticResource InputBorderStyle}">
                     <Grid ColumnDefinitions="*,Auto">
-                        <Entry Grid.Column="0" Text="{Binding Phone}" Placeholder="7XXXXXXXXXX" 
-                               MaxLength="11" Style="{StaticResource DefaultEntryStyle}"/>
-                        <Image Grid.Column="1" Source="phone.png" Margin="0,0,16,0"
-                               HeightRequest="18" HorizontalOptions="End"/>
+                        <Entry Grid.Column="0" Text="{Binding Name}" Placeholder="Введите ваше имя" 
+                               MaxLength="24" Style="{StaticResource DefaultEntryStyle}"/>
+                        <Image Grid.Column="1" Source="user.png" Margin="0,0,16,0"
+                               HeightRequest="15" HorizontalOptions="End"/>
                     </Grid>
                 </Border>
             </VerticalStackLayout>
-            
+
             <!-- Ввод пароля -->
             <VerticalStackLayout Padding="32,16,32,0">
                 <Label Text="Пароль" Style="{StaticResource InputLabelStyle}"
                        Margin="10,0,0,5"/>
                 <Border Style="{StaticResource InputBorderStyle}">
-                    <Grid ColumnDefinitions="*,Auto" BackgroundColor="#321A1C">
+                    <Grid ColumnDefinitions="*,Auto">
                         <Entry x:Name="passwordEntry" Grid.Column="0" Text="{Binding Password}" Placeholder="••••••••" 
                                IsPassword="True" Style="{StaticResource DefaultEntryStyle}"/>
                         <Image Grid.Column="1" Source="password.png" Margin="0,0,16,0"
@@ -69,21 +64,10 @@
                     </Grid>
                 </Border>
             </VerticalStackLayout>
-            
-            <!-- Кнопка входа -->
-            <Button Margin="32,32,32,0" Command="{Binding LoginCommand}" Text="Войти"
+
+            <!-- Кнопка регистрации -->
+            <Button Margin="32,32,32,0" Command="{Binding RegisterCommand}" Text="Зарегистрироваться"
                     Style="{StaticResource PrimaryButtonStyle}"/>
-            
-            <!-- Нет аккаунта -->
-            <HorizontalStackLayout Padding="50" HorizontalOptions="Center">
-                <Label Text="Нет аккаунта?" Style="{StaticResource SubtitleLabelStyle}"/>
-                <Label Text="Зарегистрироваться" Margin="5,0,0,0"
-                       Style="{StaticResource LinkLabelStyle}">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding OpenRegisterCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
-            </HorizontalStackLayout>
         </VerticalStackLayout>
     </Grid>
 </ContentPage>

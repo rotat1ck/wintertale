@@ -8,6 +8,8 @@ namespace Wintertale.Client {
 
             Routing.RegisterRoute("LoginPage", typeof(LoginPage));
             Routing.RegisterRoute("RegistrationStartPage", typeof(RegistrationStartPage));
+            Routing.RegisterRoute("VerifyPage", typeof(VerifyPage));
+            Routing.RegisterRoute("RegistrationFinalizePage", typeof(RegistrationFinalizePage));
         }
     }
 }

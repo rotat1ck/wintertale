@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Diagnostics;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Net.ServerSentEvents;
 using System.Runtime.CompilerServices;
@@ -45,15 +46,15 @@ namespace Wintertale.Client.Services.BaseApi {
                 RequestUri = new Uri(endPoint),
                 Method = HttpMethod.Get
             };
-            //requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("text/event-stream"));
-            //requestMessage.Headers.Add("Cache-Control", "no-cache");
-            requestMessage.Headers.ConnectionClose = true;
+            requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("text/event-stream"));
+            requestMessage.Headers.Add("Cache-Control", "no-cache");
+            requestMessage.Headers.ConnectionClose = false;
 
             if (request != null) {
                 requestMessage.Content = JsonContent.Create(request);
             }
 
-            using var response = await client.SendAsync(requestMessage, HttpCompletionOption.ResponseContentRead, cancellationToken);
+            using var response = await client.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
 
             using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
             await foreach (SseItem<string> e in SseParser.Create(stream).EnumerateAsync(cancellationToken)) {
