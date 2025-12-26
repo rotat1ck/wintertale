@@ -4,11 +4,15 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Wintertale.Client.Views.Dashboard.FriendRequestsPage"
              x:Name="Page">
-    
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+
     <Grid ColumnDefinitions="*">
         <Image Source="background.png" Aspect="AspectFill" />
 
-        <Border Opacity="0.9">
+        <Border Opacity="0.9" StrokeThickness="0">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                     <GradientStop Color="#80000000" Offset="0" />

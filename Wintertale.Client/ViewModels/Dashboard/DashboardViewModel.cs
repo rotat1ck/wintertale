@@ -1,9 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Wintertale.Client.Common.DTOs.Requests.Friends;
 using Wintertale.Client.Common.DTOs.Responses.Auth;
 using Wintertale.Client.Common.DTOs.Responses.Friends;

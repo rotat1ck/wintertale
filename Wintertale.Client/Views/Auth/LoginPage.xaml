@@ -12,7 +12,7 @@
     <Grid ColumnDefinitions="*" RowDefinitions="*">
         <Image Source="background.png" Aspect="AspectFill" />
 
-        <Border Opacity="0.9">
+        <Border Opacity="0.9" StrokeThickness="0">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                     <GradientStop Color="#80000000" Offset="0" />
